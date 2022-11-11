@@ -3,15 +3,15 @@ AWS_DEFAULT_REGION := ap-northeast-1
 AWS_PROFILE := localstack
 
 up:
-	docker-compose up localstack
+	docker-compose up --build
 
 init:
 	$(TERRAFORM) init
 
-plan: terraform/init terraform/fmt
+plan: init fmt
 	$(TERRAFORM) plan -parallelism=1000
 
-apply: terraform/init terraform/fmt
+apply:
 	$(TERRAFORM) apply -auto-approve=false -parallelism=1000
 
 fmt:
