@@ -4,7 +4,7 @@ services:
   terraform:
     image: hashicorp/terraform:1.2.5
     volumes:
-      - ~/.aws:/root/.aws
+      - ./.aws:/root/.aws
       - ./terraform:/app/
     working_dir: /app/
     environment:
