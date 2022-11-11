@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  terraform:
+    image: hashicorp/terraform:1.2.5
+    volumes:
+      - ~/.aws:/root/.aws
+      - ./terraform:/app/
+    working_dir: /app/
+    environment:
+      - AWS_PROFILE=${AWS_PROFILE:-kinko}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-ap-northeast-1}
+    network_mode: bridge
   localstack:
     image: localstack/localstack:latest
     environment:
@@ -11,3 +21,4 @@ services:
       - ./localstack:/tmp/localstack # ローカルディレクトリをデータ保存ディレクトリへマウント
     ports:
       - 4566:4566 # サービスへのアクセスポートは4566
+    network_mode: bridge
