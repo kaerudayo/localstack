@@ -2,3 +2,4 @@ localstack
 .terraform*
 terraform.tfstate*
 res.json
+main
